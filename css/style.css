@@ -946,6 +946,7 @@ body {
     height: 100%;
     cursor: pointer;
 }
+
 .redBtnClickAnimation{
     transition: all 0.1s;
     width: 38% !important;
@@ -956,12 +957,14 @@ body {
     align-items: center;
     justify-content: center;
     padding: 8px 4px;
-    width: 60%;
+    width: 65%;
     height: 44px;
     background-image: linear-gradient(to bottom, #ffe600, #ff7b01);
     border-radius: 14px;
-    gap: 8px;
+    /* gap: 8px; */
     margin-top: 0.8rem;
+    margin-left: 1.5rem;
+
     cursor: pointer;
 }
 .game__container-right .get-coin img{
@@ -999,5 +1002,10 @@ body {
     .backToMenuBtn{
         top: 2.5%;
         left: 6%;
+    }
+    .animalCircleImg{
+        width: 80%;
+        height: 110%;
+        cursor: pointer;
     }
 }

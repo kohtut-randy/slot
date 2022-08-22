@@ -26,6 +26,7 @@ const bubbleClickSound = document.querySelector(".bubbleClick");
 const startBtn = document.querySelector(".startBtn");
 const restartBtn = document.querySelector(".restartBtn");
 const removeBetBtn = document.querySelector(".removeBetBtn");
+const getCoin = document.querySelector(".get-coin");
 const winOrLoseDiv = document.querySelector(".winOrLose");
 const winOrLoseHeader = document.querySelector(".winOrLoseHeader");
 const winOrLoseText = document.querySelector(".winOrLoseText");
@@ -286,6 +287,14 @@ removeBetBtn.addEventListener("click", function(){
         playPermission = true;
     }
 });
+getCoin.addEventListener("click",function(){
+    playBubbleSound();
+    this.classList.add('animalBtnClickAnimation');
+    setTimeout (()=>{
+        this.classList.remove('animalBtnClickAnimation');
+    },100)
+
+})
 
 function check(x){
     console.log("i am here");
@@ -337,18 +346,30 @@ function winOrLose(x,y){
         winOrLoseHeader.textContent = "Congratulation!";
         winOrLoseText.textContent = "You Win";
         result.textContent = x - y + " Coins";
+        setTimeout(function () {
+            // resultWin.textContent = 0
+            winOrLoseDiv.style.display = "none"
+        },30000)
     }else if(x === y){
         // playDrawSound();
         winOrLoseDiv.style.display = "flex";
         winOrLoseHeader.textContent = "Sorry!";
         winOrLoseText.textContent = "Draw";
         result.textContent = "Tryagain";
+        setTimeout(function () {
+            // resultWin.textContent = 0
+            winOrLoseDiv.style.display = "none"
+        },30000)
     }else{
         // playLosingSound();
         winOrLoseDiv.style.display = "flex";
         winOrLoseHeader.textContent = "Sorry!";
         winOrLoseText.textContent = "You Lose";
         result.textContent = y - x + " Coins";
+        setTimeout(function () {
+            // resultWin.textContent = 0
+            winOrLoseDiv.style.display = "none"
+        },30000)
     }
 }
 
@@ -427,10 +448,10 @@ function  animationCircle(random,speed){
 
             setTimeout (()=>{
                 winOrLose(finalAmount,preAmount);
-                setTimeout(() => {
-                    winOrLoseDiv.style.display = "none";
-                    stopWinningSound();
-                },2500)
+                // setTimeout(() => {
+                //     winOrLoseDiv.style.display = "none";
+                //     stopWinningSound();
+                // },90000)
             },2000)
             
             setTimeout(() => {
