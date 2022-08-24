@@ -1,12 +1,13 @@
 const gameContainer = document.querySelector(".game__container");
 const menuBoard = document.querySelector(".menuBoard");
 const menuPlayBtn = document.querySelector(".menuPlayBtn");
-const menuQuitBtn = document.querySelector(".menuQuitBtn");
 const soundBtn = document.querySelector(".soundBtn");
+const soundCloseBtn = document.querySelector(".soundCloseBtn");
 const victoryBtn = document.querySelector(".victoryBtn");
 const settingBtn = document.querySelector(".settingBtn");
+const settingContainer =document.querySelector(".settingContainer");
+const settingbackBtn = document.querySelector(".settingbackBtn")
 const loadingBox = document.querySelector(".loadingBox");
-const backToMenuBtn = document.querySelector(".backToMenuBtn");
 const betBtn = document.querySelectorAll(".animalCircleImg");
 // const reduceBtn = document.querySelectorAll(".reduceBtn");
 const myValue = document.querySelectorAll(".myValue");
@@ -14,19 +15,21 @@ console.log(myValue);
 const maxValue = document.querySelectorAll(".maxValue");
 const centerImg = document.querySelectorAll(".img");
 console.log(centerImg);
+const betCoins = document.querySelector(".betCoins");
+const showWinOrLose = document.querySelector(".showWinOrLose");
 const winCount = document.querySelector(".winCount");
 const myOwnCoin = document.querySelector(".myOwnCoin");
 const circle = document.querySelector(".circle");
 let ss = document.getElementById("ss");
 const countDown = document.querySelector(".countDown");
 const clockTickAudio = document.querySelector(".clockTickAudio");
+const mainBackgroundSound = document.querySelector(".mainBackgroundSound");
 const coinDropAudio = document.querySelector(".coinDropAudio");
 const backgroundSound = document.querySelector(".backgroundSound");
 const bubbleClickSound = document.querySelector(".bubbleClick");
 const startBtn = document.querySelector(".startBtn");
 const restartBtn = document.querySelector(".restartBtn");
 const removeBetBtn = document.querySelector(".removeBetBtn");
-const getCoin = document.querySelector(".get-coin");
 const winOrLoseDiv = document.querySelector(".winOrLose");
 const winOrLoseHeader = document.querySelector(".winOrLoseHeader");
 const winOrLoseText = document.querySelector(".winOrLoseText");
@@ -35,6 +38,28 @@ const winningSound = document.querySelector(".winningSound");
 const losingSound = document.querySelector(".losingSound");
 const drawSound = document.querySelector(".drawSound");
 const selectSound = document.querySelector(".selectSound");
+const getCoinBtn = document.querySelector(".get-coin");
+const profileBtn = document.querySelector(".profile");
+const profileContainer = document.querySelector(".profileContainer");
+const profilebackBtn = document.querySelector(".profilebackBtn")
+const coinBoxBtn = document.querySelector(".coinBox");
+const coinBoxBtn2 = document.querySelector(".coinBox2");
+const showMenuCoin = document.querySelector(".showMenuCoin");
+const showCoinInProfile = document.querySelector(".showCoinInProfile");
+const winBgAnimation = document.querySelector(".winBgAnimation");
+const winBackground = document.querySelector(".winBackground");
+const quitBtn = document.querySelector(".quitBtn");
+const wantToQuitBox = document.querySelector(".wantToQuit");
+const cancleBth = document.querySelector(".cancleBth");
+const yesBtn = document.querySelector(".yesBtn");
+const achievementContainer = document.querySelector(".achievementContainer")
+const achievementbackBtn = document.querySelector(".achievementbackBtn")
+achievementbackBtn.addEventListener("click",function(){
+    playBubbleSound();
+    menuBoard.style.display="flex";
+    achievementContainer.style.display="none";
+});
+soundCloseBtn.style.display = "none";
 
     for(let i = 0; i < betBtn.length; i++){
         betBtn[i].addEventListener("click",function(){
@@ -46,9 +71,12 @@ const selectSound = document.querySelector(".selectSound");
             if(betPermission === false){
                 return ;
             }else{
-                if(+myOwnCoin.firstChild.textContent > 0 && +myValue[i].firstChild.textContent < 50){
+                if(+myOwnCoin.firstChild.textContent > 0){
                     myValue[i].firstChild.textContent = +myValue[i].firstChild.textContent + 1;
                     myOwnCoin.firstChild.textContent = +myOwnCoin.firstChild.textContent - 1;
+                    showMenuCoin.textContent = +myOwnCoin.firstChild.textContent
+                    showCoinInProfile.textContent = +myOwnCoin.firstChild.textContent
+                    betCoins.firstChild.textContent = +betCoins.firstChild.textContent + 1;
                 }
                 // reduceBtn[i].addEventListener("click", function(){
                 //     if(+myValue[i].firstChild.textContent > 0){
@@ -59,6 +87,8 @@ const selectSound = document.querySelector(".selectSound");
         })
     }
 
+let audioPermission = true;
+
 function playClockTick(){
     clockTickAudio.play();
 }
@@ -66,16 +96,22 @@ function endClockTick(){
     clockTickAudio.pause();
     clockTickAudio.currentTime = 0;
 }
-
+function playTimeCountdownStart(){
+    backgroundSound.play(); 
+}
+function stopTimeCountdownStart(){
+    backgroundSound.pause();
+    backgroundSound.currentTime = 0;
+}
 function playCoinDrop(){
     coinDropAudio.play();
 }
 function playBackgroundSound(){
-    backgroundSound.play();
+    mainBackgroundSound.play();
 }
 function stopBackgroundSound(){
-    backgroundSound.pause();
-    backgroundSound.currentTime = 0;
+    mainBackgroundSound.pause();
+    mainBackgroundSound.currentTime = 0;
 }
 function playBubbleSound(){
     bubbleClickSound.play();
@@ -100,34 +136,43 @@ function playSelectSound(){
 
 menuPlayBtn.addEventListener("click",function(){
     playBubbleSound();
+    playBackgroundSound();
     this.classList.add('animalBtnClickAnimation');
     setTimeout (()=>{
         this.classList.remove('animalBtnClickAnimation');
     },100)
     loadingBox.style.display = "flex";
     setTimeout (()=>{
-        // backToMenuBtn.style.display = "flex";
         gameContainer.style.display = "flex";
         menuBoard.style.display = "none";
         loadingBox.style.display = "none";
     },5000) 
-})
-menuQuitBtn.addEventListener("click", function(){
-    playBubbleSound();
-    this.classList.add('animalBtnClickAnimation');
-    setTimeout (()=>{
-        this.classList.remove('animalBtnClickAnimation');
-    },100)
 })
 soundBtn.addEventListener("click", function(){
     playBubbleSound();
     this.classList.add('animalBtnClickAnimation');
     setTimeout (()=>{
         this.classList.remove('animalBtnClickAnimation');
+        mainBackgroundSound.src = " ";
+        soundBtn.style.display = "none";
+        soundCloseBtn.style.display = "block";
+    },100)
+})
+soundCloseBtn.addEventListener("click", function(){
+    playBubbleSound();
+    this.classList.add('animalBtnClickAnimation');
+    setTimeout (()=>{
+        this.classList.remove('animalBtnClickAnimation');
+        mainBackgroundSound.src = "./assets/audio/mainBackgroundSound.mp3";
+        soundBtn.style.display = "block";
+        soundCloseBtn.style.display = "none";
+        playBackgroundSound();
     },100)
 })
 victoryBtn.addEventListener("click", function(){
     playBubbleSound();
+    menuBoard.style.display="none";
+    achievementContainer.style.display="flex"
     this.classList.add('animalBtnClickAnimation');
     setTimeout (()=>{
         this.classList.remove('animalBtnClickAnimation');
@@ -138,26 +183,95 @@ settingBtn.addEventListener("click", function(){
     this.classList.add('animalBtnClickAnimation');
     setTimeout (()=>{
         this.classList.remove('animalBtnClickAnimation');
+        menuBoard.style.display="none";
+        settingContainer.style.display="flex";
+    },100)
+})
+settingbackBtn.addEventListener("click",function(){
+    playBubbleSound();
+    this.classList.add('animalBtnClickAnimation');
+    setTimeout (()=>{
+        this.classList.remove('animalBtnClickAnimation');
+        menuBoard.style.display="flex";
+        settingContainer.style.display="none";
+    },100)
+});
+profileBtn.addEventListener("click", function(){
+    playBubbleSound();
+    menuBoard.style.display="none";
+    profileContainer.style.display="flex";
+    this.classList.add('animalBtnClickAnimation');
+    setTimeout (()=>{
+        this.classList.remove('animalBtnClickAnimation');
+       
+    },100)
+})
+profilebackBtn.addEventListener("click",function(){
+    playBubbleSound();
+    this.classList.add('animalBtnClickAnimation');
+    setTimeout (()=>{
+        this.classList.remove('animalBtnClickAnimation');
+        menuBoard.style.display="flex";
+        profileContainer.style.display="none";
+    },100)
+});
+coinBoxBtn.addEventListener("click", function(){
+    playBubbleSound();
+    this.classList.add('animalBtnClickAnimation');
+    setTimeout (()=>{
+        this.classList.remove('animalBtnClickAnimation');
+    },100)
+})
+coinBoxBtn2.addEventListener("click", function(){
+    playBubbleSound();
+    this.classList.add('animalBtnClickAnimation');
+    setTimeout (()=>{
+        this.classList.remove('animalBtnClickAnimation');
+    },100)
+})
+getCoinBtn.addEventListener("click", function(){
+    playCoinDrop();
+    this.classList.add('animalBtnClickAnimation');
+    setTimeout (()=>{
+        this.classList.remove('animalBtnClickAnimation');
     },100)
 })
 
-// backToMenuBtn.addEventListener("click", function(){
-//     playBubbleSound();
-//     gameContainer.style.display = "none";
-//     menuBoard.style.display = "flex";
-//     backToMenuBtn.style.display = "none";
-//     for(let i = 0; i < betBtn.length; i++){
-//         myOwnCoin.firstChild.textContent = +myOwnCoin.firstChild.textContent + +myValue[i].firstChild.textContent;
-//     };
-//     for(let i = 0; i < betBtn.length; i++){
-//         myValue[i].firstChild.textContent = 0;
-//     };
-//     countingEnd();
-//     stopBackgroundSound();
-//     playPermission = true;
-// })
+quitBtn.addEventListener("click", function(){
+    playBubbleSound();
+    this.classList.add('animalBtnClickAnimation');
+    setTimeout (()=>{
+        this.classList.remove('animalBtnClickAnimation');
+        if(playPermission == false){
+            return ;
+        }else{
+            wantToQuitBox.style.display = "flex";
+            playPermission = false;
+        }
+    },100)
+})
+cancleBth.addEventListener("click", function(){
+    playBubbleSound();
+    this.classList.add('animalBtnClickAnimation');
+    setTimeout (()=>{
+        this.classList.remove('animalBtnClickAnimation');
+        wantToQuitBox.style.display = "none";
+        playPermission = true;
+    },100)
+})
+yesBtn.addEventListener("click", function(){
+    playBubbleSound();
+    this.classList.add('animalBtnClickAnimation');
+    setTimeout (()=>{
+        this.classList.remove('animalBtnClickAnimation');
+        wantToQuitBox.style.display = "none";
+        playPermission = true;
+        gameContainer.style.display = "none";
+        menuBoard.style.display = "flex";
+    },100)
+})
 
-let count = 10;
+let count = 5;
 let timerId = 0;
 let betPermission = false;
 let playPermission = true;
@@ -172,7 +286,8 @@ startBtn.addEventListener("click", function(){
         return ;
     }else{
         playPermission = false;
-        playBackgroundSound();
+        stopBackgroundSound();
+        playTimeCountdownStart();
         circle.style.display = "block";
         if(timerId !== 0) return;
 
@@ -183,13 +298,13 @@ startBtn.addEventListener("click", function(){
             countDown.innerHTML = s;
 
             if(betPermission == false){
-                preAmount = myOwnCoin.firstChild.textContent;
+                preAmount = +myOwnCoin.firstChild.textContent;
             }
             console.log("pre amount", preAmount);
 
             betPermission = true;
             if(count > 0 && count <= 5){
-                stopBackgroundSound();
+                stopTimeCountdownStart();
                 playClockTick();
                 countDown.style.color = "rgb(253, 38, 38)";
                 ss.style.stroke = "rgb(253, 38, 38)";
@@ -235,7 +350,7 @@ startBtn.addEventListener("click", function(){
 function countingEnd(){
     clearInterval(timerId);
     timerId = 0;
-    count = 30;
+    count = 5;
     countDown.innerHTML = count;
     endClockTick()
     circle.style.display = "none"
@@ -244,28 +359,30 @@ function countingEnd(){
     countDown.style.color = "orange";
 };
 
-restartBtn.addEventListener("click", function(){
-    // myOwnCoin.firstChild.textContent = 600;
-    // for(let i = 0; i < betBtn.length; i++){
-    //     myValue[i].firstChild.textContent = 0;
-    // };
-    // countingEnd();
-    playBubbleSound();
-    this.classList.add('animalBtnClickAnimation');
-    setTimeout (()=>{
-        this.classList.remove('animalBtnClickAnimation');
-    },100)
-    if(betPermission === false){
-        return ;
-    }else{
-        for(let i = 0; i < betBtn.length; i++){
-            myOwnCoin.firstChild.textContent = +myOwnCoin.firstChild.textContent + +myValue[i].firstChild.textContent;
-        };
-        for(let i = 0; i < betBtn.length; i++){
-            myValue[i].firstChild.textContent = 0;
-        };
-    }
-});
+// restartBtn.addEventListener("click", function(){
+//     // myOwnCoin.firstChild.textContent = 600;
+//     // for(let i = 0; i < betBtn.length; i++){
+//     //     myValue[i].firstChild.textContent = 0;
+//     // };
+//     // countingEnd();
+//     playBubbleSound();
+//     this.classList.add('redBtnClickAnimation');
+//     setTimeout (()=>{
+//         this.classList.remove('redBtnClickAnimation');
+//     },100)
+//     if(betPermission === false){
+//         return ;
+//     }else{
+//         for(let i = 0; i < betBtn.length; i++){
+//             myOwnCoin.firstChild.textContent = +myOwnCoin.firstChild.textContent + +myValue[i].firstChild.textContent;
+//             showMenuCoin.textContent = +myOwnCoin.firstChild.textContent
+//         };
+//         for(let i = 0; i < betBtn.length; i++){
+//             myValue[i].firstChild.textContent = 0;
+//         };
+//         betCoins.firstChild.textContent = 0;
+//     }
+// });
 
 removeBetBtn.addEventListener("click", function(){
     playBubbleSound();
@@ -278,103 +395,100 @@ removeBetBtn.addEventListener("click", function(){
     }else{
         for(let i = 0; i < betBtn.length; i++){
             myOwnCoin.firstChild.textContent = +myOwnCoin.firstChild.textContent + +myValue[i].firstChild.textContent;
+            showMenuCoin.textContent = +myOwnCoin.firstChild.textContent
+            showCoinInProfile.textContent = +myOwnCoin.firstChild.textContent
         };
         for(let i = 0; i < betBtn.length; i++){
             myValue[i].firstChild.textContent = 0;
         };
+        betCoins.firstChild.textContent = 0;
         countingEnd();
-        stopBackgroundSound();
+        stopTimeCountdownStart();
+        playBackgroundSound();
         playPermission = true;
     }
 });
-getCoin.addEventListener("click",function(){
-    playBubbleSound();
-    this.classList.add('animalBtnClickAnimation');
-    setTimeout (()=>{
-        this.classList.remove('animalBtnClickAnimation');
-    },100)
-
-})
 
 function check(x){
     console.log("i am here");
     if(x == 1 || x == 2 || x == 3){
-        myOwnCoin.firstChild.textContent = +myOwnCoin.firstChild.textContent + (+myValue[0].firstChild.textContent * 2);
-    }
-    if(x == 21 || x == 22 || x == 23){
-        myOwnCoin.firstChild.textContent = +myOwnCoin.firstChild.textContent + (+myValue[1].firstChild.textContent * 2);
-    }
-    if(x == 25 || x == 26 || x == 27){
-        myOwnCoin.firstChild.textContent = +myOwnCoin.firstChild.textContent + (+myValue[2].firstChild.textContent * 2);
+        myOwnCoin.firstChild.textContent = +myOwnCoin.firstChild.textContent + (+myValue[0].firstChild.textContent * 4);
     }
     if(x == 29 || x == 30 || x == 31){
-        myOwnCoin.firstChild.textContent = +myOwnCoin.firstChild.textContent + (+myValue[3].firstChild.textContent * 2);
+        myOwnCoin.firstChild.textContent = +myOwnCoin.firstChild.textContent + (+myValue[1].firstChild.textContent * 6);
+    }
+    if(x == 25 || x == 26 || x == 27){
+        myOwnCoin.firstChild.textContent = +myOwnCoin.firstChild.textContent + (+myValue[2].firstChild.textContent * 12);
+    }
+    if(x == 21 || x == 22 || x == 23){
+        myOwnCoin.firstChild.textContent = +myOwnCoin.firstChild.textContent + (+myValue[3].firstChild.textContent * 24);
     }
     if(x == 5 || x == 6 || x == 7){
-        myOwnCoin.firstChild.textContent = +myOwnCoin.firstChild.textContent + (+myValue[4].firstChild.textContent * 2);
+        myOwnCoin.firstChild.textContent = +myOwnCoin.firstChild.textContent + (+myValue[4].firstChild.textContent * 4);
     }
     if(x == 9 || x == 10 || x == 11){
-        myOwnCoin.firstChild.textContent = +myOwnCoin.firstChild.textContent + (+myValue[5].firstChild.textContent * 2);
+        myOwnCoin.firstChild.textContent = +myOwnCoin.firstChild.textContent + (+myValue[5].firstChild.textContent * 6);
     }
     if(x == 13 || x == 14 || x == 15){
-        myOwnCoin.firstChild.textContent = +myOwnCoin.firstChild.textContent + (+myValue[6].firstChild.textContent * 2);
+        myOwnCoin.firstChild.textContent = +myOwnCoin.firstChild.textContent + (+myValue[6].firstChild.textContent * 12);
     }
     if(x == 17 || x == 18 || x == 19){
-        myOwnCoin.firstChild.textContent = +myOwnCoin.firstChild.textContent + (+myValue[7].firstChild.textContent * 2);
+        myOwnCoin.firstChild.textContent = +myOwnCoin.firstChild.textContent + (+myValue[7].firstChild.textContent * 24);
     }
     if(x == 0 || x == 8 || x == 16 || x == 24){
-        myOwnCoin.firstChild.textContent = +myOwnCoin.firstChild.textContent + (+myValue[8].firstChild.textContent * 2);
+        myOwnCoin.firstChild.textContent = +myOwnCoin.firstChild.textContent + (+myValue[8].firstChild.textContent * 24);
     }
     if(x == 4 || x == 12 || x == 20 || x == 28){
-        myOwnCoin.firstChild.textContent = +myOwnCoin.firstChild.textContent + (+myValue[9].firstChild.textContent * 2);
+        myOwnCoin.firstChild.textContent = +myOwnCoin.firstChild.textContent + (+myValue[9].firstChild.textContent * 48);
     }
-    if(x == 5 || x == 6 || x == 7 || x == 9 || x == 10 || x == 11 || x == 13 || x == 14 || x == 15 || x == 17 || x == 18 || x == 19 || x == 0 || x == 8 || x == 16 || x == 24 || x == 4 || x == 12 || x == 20 || x == 28){
+    if(x == 5 || x == 6 || x == 7 || x == 9 || x == 10 || x == 11 || x == 13 || x == 14 || x == 15 || x == 17 || x == 18 || x == 19){
         myOwnCoin.firstChild.textContent = +myOwnCoin.firstChild.textContent + (+myValue[10].firstChild.textContent * 2);
     }
     if(x == 1 || x == 2 || x == 3 || x == 21 || x == 22 || x == 23 || x == 25 || x == 26 || x == 27 || x == 29 || x == 30 || x == 31){
         myOwnCoin.firstChild.textContent = +myOwnCoin.firstChild.textContent + (+myValue[11].firstChild.textContent * 2);
     }
-    finalAmount = myOwnCoin.firstChild.textContent;
+    finalAmount = +myOwnCoin.firstChild.textContent;
+    showMenuCoin.textContent = +myOwnCoin.firstChild.textContent;
+    showCoinInProfile.textContent = +myOwnCoin.firstChild.textContent
     console.log("finalAmount",finalAmount);
 }
 
 function winOrLose(x,y){
     if(x > y){
-        // playWinningSound();
-        winCount.firstChild.textContent = +winCount.firstChild.textContent + 1;
+        playWinningSound();
+        showWinOrLose.textContent = "WIN";
+        showWinOrLose.style.color = "greenyellow";
+        winCount.firstChild.textContent = x - y;
+        winCount.firstChild.style.color = "greenyellow";
         winOrLoseDiv.style.display = "flex";
         winOrLoseHeader.textContent = "Congratulation!";
         winOrLoseText.textContent = "You Win";
         result.textContent = x - y + " Coins";
-        setTimeout(function () {
-            // resultWin.textContent = 0
-            winOrLoseDiv.style.display = "none"
-        },30000)
+        winBgAnimation.style.display = "block";
+        // winBackground.style.display = "block";
     }else if(x === y){
-        // playDrawSound();
+        playDrawSound();
+        showWinOrLose.textContent = "DRAW";
+        showWinOrLose.style.color = "white";
         winOrLoseDiv.style.display = "flex";
         winOrLoseHeader.textContent = "Sorry!";
         winOrLoseText.textContent = "Draw";
         result.textContent = "Tryagain";
-        setTimeout(function () {
-            // resultWin.textContent = 0
-            winOrLoseDiv.style.display = "none"
-        },30000)
     }else{
-        // playLosingSound();
+        playLosingSound();
+        showWinOrLose.textContent = "LOSE";
+        showWinOrLose.style.color = "rgb(253, 38, 38)";
+        winCount.firstChild.textContent = y - x;
+        winCount.firstChild.style.color = "rgb(253, 38, 38)";
         winOrLoseDiv.style.display = "flex";
         winOrLoseHeader.textContent = "Sorry!";
         winOrLoseText.textContent = "You Lose";
         result.textContent = y - x + " Coins";
-        setTimeout(function () {
-            // resultWin.textContent = 0
-            winOrLoseDiv.style.display = "none"
-        },30000)
     }
 }
 
 function getRandomInt(num){
-    return Math.floor((Math.random() * num));
+    return Math.floor((Math.random() * num)+1);
 }
 
 let gameIntervel = 0;
@@ -400,14 +514,14 @@ function  animationCircle(random,speed){
             i = 0;
         }
         if(number == 0){
+            if(i == 0){
+                i = 32;
+            }
             clearInterval(gameIntervel);
             let y = i - 1;
+            console.log(i);
             console.log(y);
             check(y);
-            
-            for(let i = 0; i < betBtn.length; i++){
-                myValue[i].firstChild.textContent = 0;
-            }
 
             setTimeout (()=>{
                 playSelectSound();
@@ -448,15 +562,26 @@ function  animationCircle(random,speed){
 
             setTimeout (()=>{
                 winOrLose(finalAmount,preAmount);
-                // setTimeout(() => {
-                //     winOrLoseDiv.style.display = "none";
-                //     stopWinningSound();
-                // },90000)
+                setTimeout(() => {
+                    winOrLoseDiv.style.display = "none";
+                    winBgAnimation.style.display = "none";
+                    winBackground.style.display = "none";
+                    stopWinningSound();
+                },15000)
             },2000)
             
             setTimeout(() => {
+                for(let i = 0; i < betBtn.length; i++){
+                    myValue[i].firstChild.textContent = 0;
+                }
+                betCoins.firstChild.textContent = 0;
+                showWinOrLose.textContent = "WIN";
+                showWinOrLose.style.color = "white";
+                winCount.firstChild.textContent = 0;
+                winCount.firstChild.style.color = "orange";
                 playPermission = true;
-            },3600);
+                playBackgroundSound();
+            },17500);
         }
         playBubbleSound();
     }, speed);
