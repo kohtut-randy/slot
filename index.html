@@ -16,12 +16,22 @@
   <img class="winBackground" src="https://media.giphy.com/media/IX2uM584KCRdecASGt/giphy.gif" alt="">
     <section class="container">
         <section class="game">
+          <div class="menuLoading">
+            <!-- <p class="loading">Loading</p> -->
+                <div class="dot">L</div>
+                <div class="dot">O</div>
+                <div class="dot">A</div>
+                <div class="dot">D</div>
+                <div class="dot">I</div>
+                <div class="dot">N</div>
+                <div class="dot">G</div>
+          </div>
             <div class="menuBoard">
               <div class="menuTop">
                 <div class="menuTopLeft">
                   <img class="soundBtn" src="./assets/images/menu-board/sound.png" alt="">
-                  <img class="soundCloseBtn" src="./assets/images/menu-board/soundClose.png" alt="">
-                  <img class="victoryBtn" src="./assets/images/menu-board/victory.png" alt="">
+                  <img class="soundCloseBtn" style="display: none;" src="./assets/images/menu-board/soundClose.png" alt="">
+                  <img class="achievementBtn" src="./assets/images/menu-board/victory.png" alt="">
                   <img class="settingBtn" src="./assets/images/menu-board/setting.png" alt=""> 
                 </div>
                 <div class="menuTopRight">
@@ -41,46 +51,78 @@
                 </div>
               </div>
               <img class="menuPlayBtn" src="./assets/images/menu-board/play.png" alt="">
-              <div class="loadingBox">
+              <!-- <div class="loadingBox">
                 <p class="loading">Loading</p>
                 <div class="dot"></div>
                 <div class="dot"></div>
                 <div class="dot"></div>
                 <div class="dot"></div>
                 <div class="dot"></div>
+              </div> -->
+            </div>
+
+            <div class="achievementContainer">
+              <i class=" achievementbackBtn fa-solid fa-caret-left"></i>
+              <h5>Leaderboard</h5>
+              <div class="achievementTable">
+                <div class="achievementPerson achievementPersonFirstChild">
+                  <p class="achievementName">Name</p>
+                  <span class="achievementPoint">0</span>
+                </div>
+                <div class="achievementPerson">
+                  <p class="achievementName">Name</p>
+                  <span class="achievementPoint">0</span>
+                </div>
+                <div class="achievementPerson">
+                  <p class="achievementName">Name</p>
+                  <span class="achievementPoint">0</span>
+                </div>
+                <div class="achievementPerson">
+                  <p class="achievementName">Name</p>
+                  <span class="achievementPoint">0</span>
+                </div>
+                <div class="achievementPerson">
+                  <p class="achievementName">Name</p>
+                  <span class="achievementPoint">0</span>
+                </div>
+                <div class="achievementPerson">
+                  <p class="achievementName">Name</p>
+                  <span class="achievementPoint">0</span>
+                </div>
+                <div class="achievementPerson achievementPersonLastChild">
+                  <p class="achievementName">Name</p>
+                  <span class="achievementPoint">0</span>
+                </div>
               </div>
             </div>
 
             <div class="settingContainer">
               <h3>Setting</h3>
-              <i class=" settingbackBtn fa-solid fa-caret-left"></i>
-              <div class="musicContainer">
-                <h6>Music</h6>
-                <div class="onoffContainer">
-                  <p class="offMusic">Off</p>
-                  <p class="onMusic">On</p>
-                </div>
-              </div>
-              <div class="volumeContainer">
-                <h6>
-                  Volume
-                </h6>
-                <div class="volume">
-                  <input id="vol-control" type="range" min="0" max="100" />
-                </div>
-              </div>
-              <div class="languageContainer">
-                <h6>Language</h6>
-                <div class="changeLanguage">
-                  <i class="fa-solid fa-caret-left"></i>
-                  <h5>English</h5>
-                  <i class="fa-solid fa-caret-right"></i>
-                </div>
+              <div class="setting__container-item">
+                  <div class="setting__container-item-left">
+                      <p>Music</p>
+                      <p>Volume</p>
+                  </div>
+                  <div class="setting__container-item-right">
+                      <span class="switch">
+                          <input type="checkbox" id="switcher">
+                          <label for="switcher"></label>
+                      </span>
+                      <div class="slider-cont">
+                          <div class="slider">
+                              <input type="range" min="0" max="100" value="50">
+                              <progress min="0" max="100" value="50"></progress>
+                          </div>
+                      </div>
+                  </div>
               </div>
               <div class="privacyContainer">
                 <h5>
                   Privacy & Policy
                 </h5>
+              </div>
+              <div class="settingbackBtn">
+                  <i class="fa-solid fa-caret-left"></i>
               </div>
             </div>
 
@@ -104,40 +146,6 @@
                 <img src="./assets/images/menu-board/person icon.png" alt="">
               </div>
             </div>
-            <div class="achievementContainer">
-              <i class=" achievementbackBtn fa-solid fa-caret-left"></i>
-              <h5>Leaderboard</h5>
-              <div class="achievementTable">
-                <div class="achievementPerson">
-                  <p class="achievementName">Name</p>
-                  <span class="achievementPoint">0</span>
-                </div>
-                <div class="achievementPerson">
-                  <p class="achievementName">Name</p>
-                  <span class="achievementPoint">0</span>
-                </div>
-                <div class="achievementPerson">
-                  <p class="achievementName">Name</p>
-                  <span class="achievementPoint">0</span>
-                </div>
-                <div class="achievementPerson">
-                  <p class="achievementName">Name</p>
-                  <span class="achievementPoint">0</span>
-                </div>
-                <div class="achievementPerson">
-                  <p class="achievementName">Name</p>
-                  <span class="achievementPoint">0</span>
-                </div>
-                <div class="achievementPerson">
-                  <p class="achievementName">Name</p>
-                  <span class="achievementPoint">0</span>
-                </div>
-                <div class="achievementPerson">
-                  <p class="achievementName">Name</p>
-                  <span class="achievementPoint">0</span>
-                </div>
-              </div>
-            </div>
 
             <div class="game__container">
                 <div class="game__container-left">
@@ -149,7 +157,7 @@
                             </div>
                             <div class="amountField">
                                 <section class="myValue"><span>0</span></section>
-                                <section class="maxValue"><span>x4</span></section>
+                                <section class="maxValue"><span>4</span></section>
                             </div>
                         </div>
                         <div class="box">
@@ -159,7 +167,7 @@
                             </div>
                             <div class="amountField">
                                 <section class="myValue"><span>0</span></section>
-                                <section class="maxValue"><span>x6</span></section>
+                                <section class="maxValue"><span>6</span></section>
                             </div>
                         </div>
                         <div class="box">
@@ -169,7 +177,7 @@
                             </div>
                             <div class="amountField">
                                 <section class="myValue"><span>0</span></section>
-                                <section class="maxValue"><span>x12</span></section>
+                                <section class="maxValue"><span>12</span></section>
                             </div>
                         </div>
                         <div class="box">
@@ -179,7 +187,7 @@
                             </div>
                             <div class="amountField">
                                 <section class="myValue"><span>0</span></section>
-                                <section class="maxValue"><span>x24</span></section>
+                                <section class="maxValue"><span>24</span></section>
                             </div>
                         </div>
                     </div>
@@ -192,7 +200,7 @@
                             </div>
                             <div class="amountField">
                                 <section class="myValue"><span>0</span></section>
-                                <section class="maxValue"><span>x4</span></section>
+                                <section class="maxValue"><span>4</span></section>
                             </div>
                         </div>
                         <div class="box">
@@ -202,7 +210,7 @@
                             </div>
                             <div class="amountField">
                                 <section class="myValue"><span>0</span></section>
-                                <section class="maxValue"><span>x6</span></section>
+                                <section class="maxValue"><span>6</span></section>
                             </div>
                         </div>
                         <div class="box">
@@ -212,7 +220,7 @@
                             </div>
                             <div class="amountField">
                                 <section class="myValue"><span>0</span></section>
-                                <section class="maxValue"><span>x12</span></section>
+                                <section class="maxValue"><span>12</span></section>
                             </div>
                         </div>
                         <div class="box">
@@ -222,7 +230,7 @@
                             </div>
                             <div class="amountField">
                                 <section class="myValue"><span>0</span></section>
-                                <section class="maxValue"><span>x24</span></section>
+                                <section class="maxValue"><span>24</span></section>
                             </div>
                         </div>
                     </div>
@@ -232,7 +240,7 @@
                       <div class="img1">
                         <div class="img">
                           <img
-                            src="./assets/images/square-buttons/tortoise(top corner).png"
+                            src="./assets/images/square-buttons/bird.png"
                             alt="tortoise(top corner)"
                           />
                         </div>
@@ -296,7 +304,7 @@
                       <div class="img9">
                         <div class="img">
                           <img
-                            src="./assets/images/square-buttons/tortoise(top corner).png"
+                            src="./assets/images/square-buttons/bird.png"
                             alt="tortoise(top corner)"
                           />
                         </div>
@@ -360,7 +368,7 @@
                       <div class="img17">
                         <div class="img">
                           <img
-                            src="./assets/images/square-buttons/tortoise(top corner).png"
+                            src="./assets/images/square-buttons/bird.png"
                             alt="tortoise(top corner)"
                           />
                         </div>
@@ -424,7 +432,7 @@
                       <div class="img25">
                         <div class="img">
                           <img
-                            src="./assets/images/square-buttons/tortoise(bottom).png"
+                            src="./assets/images/square-buttons/bird.png"
                             alt="tortoise(bottom).png"
                           />
                         </div>
@@ -501,10 +509,10 @@
                             </div>
                             <div class="wantToQuit">
                               <h3>Are You Sure Want To Quit?</h3>
-                             <div class="dada">
-                              <span class="cancleBth">Cancle</span>
-                              <span class="yesBtn">Yes</span>
-                             </div>
+                              <div class="bb">
+                                <span class="cancleBth">Cancle</span>
+                                <span class="yesBtn">Yes</span>
+                              </div>
                             </div>
                           </div>  
                     </div>
@@ -526,11 +534,11 @@
                 <div class="game__container-right">
                     <div class="box">
                         <div class="btnContainer">
-                            <img class="animalCircleImg" src="./assets/images/round-buttons/tortoise.png" alt="">
+                            <img class="animalCircleImg birdCircleImg" src="./assets/images/round-buttons/birdCircle.png" alt="">
                         </div>
                         <div class="box-amount">
                             <section class="myValue box-amount-item"><span>0</span></section>
-                            <section class="maxValue box-amount-item-max"><span>x24</span></section>
+                            <section class="maxValue box-amount-item-max"><span>24</span></section>
                         </div>
                         <!-- <div class="reduceBtn reduceBtn2"><i class="fa-solid fa-caret-down"></i></div> -->
                     </div>
@@ -540,7 +548,7 @@
                         </div>
                         <div class="box-amount">
                             <section class="myValue box-amount-item"><span>0</span></section>
-                            <section class="maxValue box-amount-item-max"><span>x48</span></section>
+                            <section class="maxValue box-amount-item-max"><span>48</span></section>
                         </div>
                         <!-- <div class="reduceBtn reduceBtn2"><i class="fa-solid fa-caret-down"></i></div> -->
                     </div>
@@ -550,7 +558,7 @@
                         </div>
                         <div class="box-amount">
                             <section class="myValue box-amount-item"><span>0</span></section>
-                            <section class="maxValue box-amount-item-max"><span>x2</span></section>
+                            <section class="maxValue box-amount-item-max"><span>2</span></section>
                         </div>
                         <!-- <div class="reduceBtn reduceBtn2"><i class="fa-solid fa-caret-down"></i></div> -->
                     </div>
@@ -560,7 +568,7 @@
                         </div>
                         <div class="box-amount">
                             <section class="myValue box-amount-item"><span>0</span></section>
-                            <section class="maxValue box-amount-item-max"><span>x2</span></section>
+                            <section class="maxValue box-amount-item-max"><span>2</span></section>
                         </div>
                         <!-- <div class="reduceBtn reduceBtn2"><i class="fa-solid fa-caret-down"></i></div> -->
                     </div>
@@ -578,8 +586,8 @@
                         <img src="./assets/images/btn/coin1.png" alt="">
                         <span>Get 20 coins</span>
                     </div>
-                    <!-- <div class="quitBtn"> -->
-                      <!-- <span>QUIT</span> -->
+                    <!-- <div class="quitBtn">
+                      <span>QUIT</span> -->
                   </div>
                 </div>
             </div>
@@ -611,7 +619,7 @@
               <code>audio</code> element.
     </audio>
     <audio controls
-    src="./assets/audio/CoinDrop.wav"
+    src="./assets/audio/Screw Drop.wav"
     class="coinDropAudio">
        Your browser does not support the
        <code>audio</code> element.
@@ -629,13 +637,13 @@
        <code>audio</code> element.
     </audio>
     <audio controls
-    src="./assets/audio/Game Win Horns .wav"
+    src="./assets/audio/huge win.wav"
     class="winningSound">
        Your browser does not support the
        <code>audio</code> element.
     </audio>
     <audio controls
-    src="./assets/audio/losingSound.wav"
+    src="./assets/audio/Orchestral Lose.wav"
     class="losingSound">
        Your browser does not support the
        <code>audio</code> element.
@@ -653,7 +661,7 @@
        <code>audio</code> element.
     </audio>
     <audio controls
-    src="./assets/audio/mainBackgroundSound.mp3"
+    src="./assets/audio/mainBackgroundSound.wav"
     class="mainBackgroundSound">
        Your browser does not support the
        <code>audio</code> element.

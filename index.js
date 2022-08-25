@@ -3,11 +3,14 @@ const menuBoard = document.querySelector(".menuBoard");
 const menuPlayBtn = document.querySelector(".menuPlayBtn");
 const soundBtn = document.querySelector(".soundBtn");
 const soundCloseBtn = document.querySelector(".soundCloseBtn");
-const victoryBtn = document.querySelector(".victoryBtn");
+const achievementBtn = document.querySelector(".achievementBtn");
+const achievementContainer = document.querySelector(".achievementContainer");
+const achievementbackBtn = document.querySelector(".achievementbackBtn");
 const settingBtn = document.querySelector(".settingBtn");
 const settingContainer =document.querySelector(".settingContainer");
-const settingbackBtn = document.querySelector(".settingbackBtn")
-const loadingBox = document.querySelector(".loadingBox");
+const settingbackBtn = document.querySelector(".settingbackBtn");
+const privacyAndPolicyBtn = document.querySelector(".privacyContainer");
+// const loadingBox = document.querySelector(".loadingBox");
 const betBtn = document.querySelectorAll(".animalCircleImg");
 // const reduceBtn = document.querySelectorAll(".reduceBtn");
 const myValue = document.querySelectorAll(".myValue");
@@ -52,21 +55,83 @@ const quitBtn = document.querySelector(".quitBtn");
 const wantToQuitBox = document.querySelector(".wantToQuit");
 const cancleBth = document.querySelector(".cancleBth");
 const yesBtn = document.querySelector(".yesBtn");
-const achievementContainer = document.querySelector(".achievementContainer")
-const achievementbackBtn = document.querySelector(".achievementbackBtn")
-achievementbackBtn.addEventListener("click",function(){
-    playBubbleSound();
-    menuBoard.style.display="flex";
-    achievementContainer.style.display="none";
-});
-soundCloseBtn.style.display = "none";
+const menuLoading = document.querySelector(".menuLoading");
+const switcher = document.querySelector("#switcher");
+
+function getImage(url){
+    return new Promise(function(resolve,reject){
+        var img = new Image();
+        img.onload = function(){
+            resolve(url);
+        };
+        img.onerror = function(){
+            reject(url);
+        };
+        img.src = url;
+    });
+}
+
+function gameContainerPreloader(){
+    Promise.all([
+        getImage("./assets/images/square-buttons/sea-bg.png"),
+        getImage("https://media.giphy.com/media/IX2uM584KCRdecASGt/giphy.gif"),
+        getImage("./assets/images/animation-gif/giphy.gif"),
+        getImage("./assets/images/btn/play.png"),
+        getImage("./assets/images/btn/cross.png"),
+        getImage("./assets/images/round-buttons/dog.png"),
+        getImage("./assets/images/round-buttons/monkey.png"),
+        getImage("./assets/images/round-buttons/sheep.png"),
+        getImage("./assets/images/round-buttons/elephant.png"),
+        getImage("./assets/images/round-buttons/seahorse.png"),
+        getImage("./assets/images/round-buttons/jellyfish.png"),
+        getImage("./assets/images/round-buttons/dolphin.png"),
+        getImage("./assets/images/round-buttons/shark.png"),
+        getImage("./assets/images/square-buttons/bird.png"),
+        getImage("./assets/images/round-buttons/whale.png"),
+        getImage("./assets/images/round-buttons/sea.png"),
+        getImage("./assets/images/round-buttons/land.png"),
+        getImage("./assets/images/square-buttons/dog(top corner).png"),
+        getImage("./assets/images/square-buttons/whale(top corner).png"),
+        getImage("./assets/images/square-buttons/seahorse(right side).png"),
+        getImage("./assets/images/square-buttons/jellyfish(top corner).png"),
+        getImage("./assets/images/square-buttons/whale(right side).png"),
+        getImage("./assets/images/square-buttons/dolphin(bottom).png"),
+        getImage("./assets/images/square-buttons/shark(right side).png"),
+        getImage("./assets/images/square-buttons/elephant(bottom).png"),
+        getImage("./assets/images/round-buttons/birdCircle.png"),
+        getImage("./assets/images/square-buttons/sheep(left side).png"),
+        getImage("./assets/images/square-buttons/monkey(left side).png"),
+    ]).then(() => {
+        gameContainer.style.display = "flex";
+        menuBoard.style.display = "none";
+        // loadingBox.style.display = "none"; 
+    })
+}
+
+function menuBoardPreloader(){
+    Promise.all([
+        getImage("./assets/images/menu-board/menuBoardBg.jpeg"),
+        getImage("./assets/images/btn/coin1.png"),
+        getImage("./assets/images/menu-board/sound.png"),
+        getImage("./assets/images/menu-board/soundClose.png"),
+        getImage("./assets/images/menu-board/victory.png"),
+        getImage("./assets/images/menu-board/setting.png"),
+        getImage("./assets/images/menu-board/person icon.png"),
+        getImage("./assets/images/menu-board/play.png"),
+    ]).then(() => {
+        menuLoading.style.display = "none";
+        menuBoard.style.display = "flex";
+    })
+}
+
+menuBoardPreloader();
 
     for(let i = 0; i < betBtn.length; i++){
         betBtn[i].addEventListener("click",function(){
             playCoinDrop();
-            this.classList.add('animalBtnClickAnimation');
+            this.classList.add('zoomoutAnimate');
             setTimeout (()=>{
-                this.classList.remove('animalBtnClickAnimation');
+                this.classList.remove('zoomoutAnimate');
             },100) 
             if(betPermission === false){
                 return ;
@@ -108,6 +173,7 @@ function playCoinDrop(){
 }
 function playBackgroundSound(){
     mainBackgroundSound.play();
+    mainBackgroundSound.loop = true;
 }
 function stopBackgroundSound(){
     mainBackgroundSound.pause();
@@ -137,22 +203,23 @@ function playSelectSound(){
 menuPlayBtn.addEventListener("click",function(){
     playBubbleSound();
     playBackgroundSound();
-    this.classList.add('animalBtnClickAnimation');
+    this.classList.add('menuBtnClickAnimation');
     setTimeout (()=>{
-        this.classList.remove('animalBtnClickAnimation');
+        this.classList.remove('menuBtnClickAnimation');
     },100)
-    loadingBox.style.display = "flex";
-    setTimeout (()=>{
-        gameContainer.style.display = "flex";
-        menuBoard.style.display = "none";
-        loadingBox.style.display = "none";
-    },5000) 
+    // loadingBox.style.display = "flex";
+    // setTimeout (()=>{
+    //     gameContainer.style.display = "flex";
+    //     menuBoard.style.display = "none";
+    //     loadingBox.style.display = "none";
+    // },5000) 
+    gameContainerPreloader();
 })
 soundBtn.addEventListener("click", function(){
     playBubbleSound();
-    this.classList.add('animalBtnClickAnimation');
+    this.classList.add('menuTopLeftBtnClickAnimation');
     setTimeout (()=>{
-        this.classList.remove('animalBtnClickAnimation');
+        this.classList.remove('menuTopLeftBtnClickAnimation');
         mainBackgroundSound.src = " ";
         soundBtn.style.display = "none";
         soundCloseBtn.style.display = "block";
@@ -160,88 +227,132 @@ soundBtn.addEventListener("click", function(){
 })
 soundCloseBtn.addEventListener("click", function(){
     playBubbleSound();
-    this.classList.add('animalBtnClickAnimation');
+    this.classList.add('menuTopLeftBtnClickAnimation');
     setTimeout (()=>{
-        this.classList.remove('animalBtnClickAnimation');
+        this.classList.remove('menuTopLeftBtnClickAnimation');
         mainBackgroundSound.src = "./assets/audio/mainBackgroundSound.mp3";
         soundBtn.style.display = "block";
         soundCloseBtn.style.display = "none";
         playBackgroundSound();
     },100)
 })
-victoryBtn.addEventListener("click", function(){
+achievementBtn.addEventListener("click", function(){
     playBubbleSound();
-    menuBoard.style.display="none";
-    achievementContainer.style.display="flex"
-    this.classList.add('animalBtnClickAnimation');
+    this.classList.add('menuTopLeftBtnClickAnimation');
     setTimeout (()=>{
-        this.classList.remove('animalBtnClickAnimation');
+        this.classList.remove('menuTopLeftBtnClickAnimation');
+        menuBoard.style.display = "none";
+        achievementContainer.style.display = "flex";
     },100)
 })
+achievementbackBtn.addEventListener("click",function(){
+    playBubbleSound();
+    this.classList.add('zoomoutAnimate');
+    setTimeout (()=>{
+        this.classList.remove('zoomoutAnimate');
+        menuBoard.style.display="flex";
+        achievementContainer.style.display="none";
+    },100)
+});
 settingBtn.addEventListener("click", function(){
     playBubbleSound();
-    this.classList.add('animalBtnClickAnimation');
+    this.classList.add('menuTopLeftBtnClickAnimation');
     setTimeout (()=>{
-        this.classList.remove('animalBtnClickAnimation');
+        this.classList.remove('menuTopLeftBtnClickAnimation');
         menuBoard.style.display="none";
         settingContainer.style.display="flex";
     },100)
 })
 settingbackBtn.addEventListener("click",function(){
     playBubbleSound();
-    this.classList.add('animalBtnClickAnimation');
+    this.classList.add('zoomoutAnimate');
     setTimeout (()=>{
-        this.classList.remove('animalBtnClickAnimation');
+        this.classList.remove('zoomoutAnimate');
         menuBoard.style.display="flex";
         settingContainer.style.display="none";
     },100)
 });
+
+let checked = true
+switcher.addEventListener("click", function () {
+    playBubbleSound();
+    if(checked) {
+        console.log("off")
+        mainBackgroundSound.src = " ";
+        soundBtn.style.display = "none";
+        soundCloseBtn.style.display = "block";
+        checked = false
+    }else {
+        console.log("on")
+        checked = true
+        mainBackgroundSound.src = "./assets/audio/mainBackgroundSound.mp3";
+        soundBtn.style.display = "block";
+        soundCloseBtn.style.display = "none";
+        playBackgroundSound();
+    }
+})
+
+window.onload = function () {
+    slider = document.querySelector(".slider input");
+    slider.oninput = function () {
+        progressBar = document.querySelector(".slider progress");
+        progressBar.value = slider.value;
+        mainBackgroundSound.volume = slider.value / 100;
+    }
+}
+
+privacyAndPolicyBtn.addEventListener("click",function(){
+    playBubbleSound();
+    this.classList.add('zoomoutAnimate');
+    setTimeout (()=>{
+        this.classList.remove('zoomoutAnimate');
+    },100)
+});
 profileBtn.addEventListener("click", function(){
     playBubbleSound();
-    menuBoard.style.display="none";
-    profileContainer.style.display="flex";
-    this.classList.add('animalBtnClickAnimation');
+    this.classList.add('zoomoutAnimate');
     setTimeout (()=>{
-        this.classList.remove('animalBtnClickAnimation');
-       
+        this.classList.remove('zoomoutAnimate');
+        menuBoard.style.display="none";
+        profileContainer.style.display="flex";
     },100)
 })
 profilebackBtn.addEventListener("click",function(){
     playBubbleSound();
-    this.classList.add('animalBtnClickAnimation');
+    this.classList.add('zoomoutAnimate');
     setTimeout (()=>{
-        this.classList.remove('animalBtnClickAnimation');
+        this.classList.remove('zoomoutAnimate');
         menuBoard.style.display="flex";
         profileContainer.style.display="none";
     },100)
 });
 coinBoxBtn.addEventListener("click", function(){
     playBubbleSound();
-    this.classList.add('animalBtnClickAnimation');
+    this.classList.add('zoomoutAnimate');
     setTimeout (()=>{
-        this.classList.remove('animalBtnClickAnimation');
+        this.classList.remove('zoomoutAnimate');
     },100)
 })
 coinBoxBtn2.addEventListener("click", function(){
     playBubbleSound();
-    this.classList.add('animalBtnClickAnimation');
+    this.classList.add('zoomoutAnimate');
     setTimeout (()=>{
-        this.classList.remove('animalBtnClickAnimation');
+        this.classList.remove('zoomoutAnimate');
     },100)
 })
 getCoinBtn.addEventListener("click", function(){
     playCoinDrop();
-    this.classList.add('animalBtnClickAnimation');
+    this.classList.add('zoomoutAnimate');
     setTimeout (()=>{
-        this.classList.remove('animalBtnClickAnimation');
+        this.classList.remove('zoomoutAnimate');
     },100)
 })
 
 quitBtn.addEventListener("click", function(){
     playBubbleSound();
-    this.classList.add('animalBtnClickAnimation');
+    this.classList.add('zoomoutAnimate');
     setTimeout (()=>{
-        this.classList.remove('animalBtnClickAnimation');
+        this.classList.remove('zoomoutAnimate');
         if(playPermission == false){
             return ;
         }else{
@@ -252,18 +363,18 @@ quitBtn.addEventListener("click", function(){
 })
 cancleBth.addEventListener("click", function(){
     playBubbleSound();
-    this.classList.add('animalBtnClickAnimation');
+    this.classList.add('zoomoutAnimate');
     setTimeout (()=>{
-        this.classList.remove('animalBtnClickAnimation');
+        this.classList.remove('zoomoutAnimate');
         wantToQuitBox.style.display = "none";
         playPermission = true;
     },100)
 })
 yesBtn.addEventListener("click", function(){
     playBubbleSound();
-    this.classList.add('animalBtnClickAnimation');
+    this.classList.add('zoomoutAnimate');
     setTimeout (()=>{
-        this.classList.remove('animalBtnClickAnimation');
+        this.classList.remove('zoomoutAnimate');
         wantToQuitBox.style.display = "none";
         playPermission = true;
         gameContainer.style.display = "none";
@@ -271,16 +382,16 @@ yesBtn.addEventListener("click", function(){
     },100)
 })
 
-let count = 5;
+let count = 30;
 let timerId = 0;
 let betPermission = false;
 let playPermission = true;
 
 startBtn.addEventListener("click", function(){
     playBubbleSound();
-    this.classList.add('animalBtnClickAnimation');
+    this.classList.add('zoomoutAnimate');
     setTimeout (()=>{
-        this.classList.remove('animalBtnClickAnimation');
+        this.classList.remove('zoomoutAnimate');
     },100) 
     if(playPermission === false){
         return ;
@@ -350,7 +461,7 @@ startBtn.addEventListener("click", function(){
 function countingEnd(){
     clearInterval(timerId);
     timerId = 0;
-    count = 5;
+    count = 30;
     countDown.innerHTML = count;
     endClockTick()
     circle.style.display = "none"
@@ -386,9 +497,9 @@ function countingEnd(){
 
 removeBetBtn.addEventListener("click", function(){
     playBubbleSound();
-    this.classList.add('animalBtnClickAnimation');
+    this.classList.add('zoomoutAnimate');
     setTimeout (()=>{
-        this.classList.remove('animalBtnClickAnimation');
+        this.classList.remove('zoomoutAnimate');
     },100)
     if(betPermission === false){
         return ;
@@ -465,7 +576,7 @@ function winOrLose(x,y){
         winOrLoseText.textContent = "You Win";
         result.textContent = x - y + " Coins";
         winBgAnimation.style.display = "block";
-        // winBackground.style.display = "block";
+        winBackground.style.display = "block";
     }else if(x === y){
         playDrawSound();
         showWinOrLose.textContent = "DRAW";
@@ -567,7 +678,7 @@ function  animationCircle(random,speed){
                     winBgAnimation.style.display = "none";
                     winBackground.style.display = "none";
                     stopWinningSound();
-                },15000)
+                },10000)
             },2000)
             
             setTimeout(() => {
@@ -581,7 +692,7 @@ function  animationCircle(random,speed){
                 winCount.firstChild.style.color = "orange";
                 playPermission = true;
                 playBackgroundSound();
-            },17500);
+            },12500);
         }
         playBubbleSound();
     }, speed);
